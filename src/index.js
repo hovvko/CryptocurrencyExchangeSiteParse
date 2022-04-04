@@ -32,10 +32,10 @@ async function parse(parseURL, selector) {
 
         //Ждем когда загрузится селектор и вытягиваем из него текст
         await page.waitForSelector(selector);
-        const listingText = await page.$eval(selector, (element) => element['innerText']);
+        const listingText1 = await page.$eval(selector, (element) => element['innerText']);
         const listingURL = await page.$eval(selector, (element) => `https://www.binance.com/${element.getAttribute('href')}`);
-        // console.log(listingText)
-        // const listingText = 'Binance Will List ApeCoin (SDASDSADASD)';
+        console.log(listingText1)
+        const listingText = 'Binance Will List ApeCoin (APE)';
 
         //Проверяем есть ли в полученом тексте ключевые слова о листинге новой монеты и записываем значение true или false в переменную
         const checkIsListing = listingText.includes(listingOn.binance);
