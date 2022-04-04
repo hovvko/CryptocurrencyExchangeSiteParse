@@ -26,7 +26,7 @@ async function parse(parseURL, selector) {
 
     try {
 
-        const browser = await puppeteer.launch({ args: ['--no-sandbox'] }); //Загрузка браузера
+        const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] }); //Загрузка браузера
         const page = await browser.newPage(); //Открытие новой вкладки
         await page.goto(parseURL); //Переход на страницу которую хотим спарсить
 
@@ -111,7 +111,7 @@ async function parse(parseURL, selector) {
 async function checkIfCoinOnFuturesInCryptoExchange(cryptoExchangeFuturesURL, selector, coinName, cryptoCurrencyName) {
     //Загрузка браузера, открытие новой вкладки та преход на страницу фьючерсов - передавая в URL динамично
     //название монеты, которое мы получили выше
-    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+    const browser = await puppeteer.launch({ headless: true,  args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.goto(cryptoExchangeFuturesURL);
 
