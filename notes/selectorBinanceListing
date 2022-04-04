@@ -1,0 +1,1 @@
+const latestListSelector = '#__APP > div > div > main > div.css-1y26fy3 > div.css-qmaao2 > section > div.css-1txs1yu > div.css-1q4wrpt > div:nth-child(1) > a > div';
