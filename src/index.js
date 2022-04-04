@@ -26,16 +26,16 @@ async function parse(parseURL, selector) {
 
     try {
 
-        const browser = await puppeteer.launch(); //Загрузка браузера
+        const browser = await puppeteer.launch({ args: ['--no-sandbox'] }); //Загрузка браузера
         const page = await browser.newPage(); //Открытие новой вкладки
         await page.goto(parseURL); //Переход на страницу которую хотим спарсить
 
         //Ждем когда загрузится селектор и вытягиваем из него текст
         await page.waitForSelector(selector);
-        const listingText1 = await page.$eval(selector, (element) => element['innerText']);
+        const listingText = await page.$eval(selector, (element) => element['innerText']);
         const listingURL = await page.$eval(selector, (element) => `https://www.binance.com/${element.getAttribute('href')}`);
-        console.log(listingText1)
-        const listingText = 'Binance Will List ApeCoin (APE)';
+        // console.log(listingText1)
+        // const listingText = 'Binance Will List ApeCoin (APE)';
 
         //Проверяем есть ли в полученом тексте ключевые слова о листинге новой монеты и записываем значение true или false в переменную
         const checkIsListing = listingText.includes(listingOn.binance);
@@ -111,7 +111,7 @@ async function parse(parseURL, selector) {
 async function checkIfCoinOnFuturesInCryptoExchange(cryptoExchangeFuturesURL, selector, coinName, cryptoCurrencyName) {
     //Загрузка браузера, открытие новой вкладки та преход на страницу фьючерсов - передавая в URL динамично
     //название монеты, которое мы получили выше
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.goto(cryptoExchangeFuturesURL);
 
